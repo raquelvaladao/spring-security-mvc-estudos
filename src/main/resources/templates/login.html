@@ -1,0 +1,47 @@
+<html xmlns:th="http://https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+  <title>Signin Template for Bootstrap</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" th:href="@{~/css/bootstrap-min.css}">
+
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" type="text/css" th:href="@{~/css/login.css}">
+</head>
+
+<body class="text-center">
+
+<div th:if="${message != null}" th:text="${message}" class="text-danger"></div>
+
+<div>
+  <form class="form-signin" th:action="@{/login}" method="post">
+    <img class="mb-4" th:src="@{~/images/logo.jpg}" alt="" width="72" height="72">
+
+    <h1 class="h3 mb-3 font-weight-normal">Logar usuário</h1>
+    <label for="userEmail" class="sr-only">Email</label>
+    <input type="text" id="userEmail" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
+    <label for="inputPassword" class="sr-only">Senha</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    <a class="btn btn-lg btn-primary btn-block" th:href="@{/register}">Registrar</a>
+
+    <p class="mt-5 mb-3 text-muted">© 2021</p>
+  </form>
+</div>
+
+
+
+</body>
+</html>

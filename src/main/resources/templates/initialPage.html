@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fixedLayout.html}">
+
+<div layout:fragment="content">
+
+<main role="main" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h2 class="jumbotron-heading">
+        <div sec:authorize="isAuthenticated()">
+          Olá, <span sec:authentication="name">Usuario email</span>
+        </div>
+      </h2>
+      <p class="lead text-muted">Nessa página você pode listar e ver se for usuário, e cadastrar se for admin.</p>
+    </div>
+  </section>
+
+
+  <div th:if="${message != null}" class="alert alert-primary">
+      <div class="container d-flex justify-content-center mb-4" >
+        <p th:text="${message}"></p>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4"
+             sec:authorize="hasRole('ROLE_ADMIN')"
+        >
+          <div class="card mb-4 box-shadow shadow p-3 mb-5 bg-white rounded"  role="button">
+            <img th:src="@{~/images/lssssssssss}"
+                 class="card-img-top"
+                 data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+                 alt="Thumbnail [100%x225]"
+                 style="height: 225px; width: 100%; display: block;"
+                 data-holder-rendered="true"
+            />
+
+            <div class="card-body">
+              <h3 class="card-title text-center">Cadastrar</h3>
+              <a th:href="@{sssssssssssssss}" class="stretched-link"></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow shadow p-3 mb-5 bg-white rounded" th:href="@{ sssssssssssssss}">
+            <img th:src="@{~/images/sseccccccccccc.svg}"
+                 class="card-img-top"
+                 data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+                 alt="Thumbnail [100%x225]"
+                 style="height: 225px; width: 100%; display: block;"
+                 data-holder-rendered="true"
+            />
+            <div class="card-body">
+              <h3 class="card-title text-center">Ver</h3>
+              <a th:href="@{sssssssssssssss}" class="stretched-link"></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow shadow p-3 mb-5 bg-white rounded">
+            <img th:src="@{~/images/seccccccc.svg}"
+                 class="card-img-top"
+                 data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+                 alt="Thumbnail [100%x225]"
+                 style="height: 225px; width: 100%; display: block;"
+                 data-holder-rendered="true"
+            />
+            <div class="card-body">
+              <h3 class="card-title text-center">Deletar</h3>
+              <a th:href="@{mapppp }" class="stretched-link"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+</div>
+
+</html>

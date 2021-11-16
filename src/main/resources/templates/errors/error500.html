@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fixedLayout.html}">
+
+<div layout:fragment="content">
+    <div class="container d-flex justify-content-center">
+        <img th:src="@{~/images/500.svg}" alt="Logo" style="width:650px;"/>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <h1>Ooops! Tivemos um problema interno.</h1>
+    </div>
+    <div class="container d-flex justify-content-center mb-4">
+        <a th:href="@{/products}" type="button" class="btn btn-primary btn-lg">Voltar para início</a>
+    </div>
+</div>
+
+</html>

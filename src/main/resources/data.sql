@@ -1,0 +1,2 @@
+INSERT INTO users VALUES (1, '$2a$10$jxCZNDc7iOp280RIpdMQ2.3hcgdb29gmUZ8KPj5VLNsVIf38lLN8e', 'USER', 'user@email.com');
+INSERT INTO users VALUES (2, '$2a$10$jxCZNDc7iOp280RIpdMQ2.3hcgdb29gmUZ8KPj5VLNsVIf38lLN8e', 'ADMIN', 'admin@email.com');
