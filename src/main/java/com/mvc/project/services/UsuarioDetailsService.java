@@ -28,14 +28,13 @@ public class UsuarioDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario;
-            try{
-                usuario = usuarioRepository.findByUsername(email);
-            } catch (Exception e){
-                throw new UsernameNotFoundException(String.format(USUARIO_NOT_FOUND, email) + e.getMessage());
+
+        usuario = usuarioRepository.findByUsername(email);
+        if(usuario == null){
+            throw new UsernameNotFoundException(String.format(USUARIO_NOT_FOUND, email));
         }
+
         List<GrantedAuthority> authorities = getUserAuthority(Set.of(usuario.getRole()));
-
-
         return new User(usuario.getUsername(), usuario.getPassword(), authorities);
     }
 

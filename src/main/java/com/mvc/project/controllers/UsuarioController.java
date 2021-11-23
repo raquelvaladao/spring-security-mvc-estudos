@@ -3,10 +3,13 @@ package com.mvc.project.controllers;
 import com.mvc.project.models.Usuario;
 import com.mvc.project.services.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,10 +23,15 @@ public class UsuarioController {
     private UsuarioDetailsService usuarioDetailsService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/login")
-    public ModelAndView showLogin(){
+    public ModelAndView showLogin(@RequestParam(name = "error", required = false) Boolean error){
         ModelAndView mv = new ModelAndView("/login");
+        if(error != null){
+            mv.addObject("message", "Senha ou usuário incorreto.");
+        }
+
         return mv;
     }
+
 
     @RequestMapping(method = RequestMethod.GET, path = "/register")
     public ModelAndView createProduct() {
@@ -35,7 +43,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "register")
-    public ModelAndView saveProduct(@Valid Usuario usuario, BindingResult errors, RedirectAttributes redirect) throws Exception {
+    public ModelAndView saveUsuario(@Valid Usuario usuario, BindingResult errors, RedirectAttributes redirect) throws Exception {
         ModelAndView redirectView = new ModelAndView("redirect:/login");
         ModelAndView mv = new ModelAndView("/formRegister.html");
 

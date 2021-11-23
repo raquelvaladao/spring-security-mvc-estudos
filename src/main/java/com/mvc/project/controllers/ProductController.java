@@ -2,8 +2,12 @@ package com.mvc.project.controllers;
 
 
 import com.mvc.project.models.Product;
+import com.mvc.project.models.Usuario;
 import com.mvc.project.services.ProductService;
+import com.mvc.project.services.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -22,12 +27,27 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private UsuarioDetailsService usuarioService;
+
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView listProducts(){
+    public ModelAndView listProducts(@RequestParam(name = "success", required = false) String successLogin, HttpServletRequest httpServletRequest){
         ModelAndView mv = new ModelAndView("/allProducts.html");
         List<Product> list = productService.getAllProducts();
 
-        mv.addObject("list", list);
+        if(successLogin.equals("true")){
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+            //autenticou
+            //pega login, pega authorities, e manda email.
+            Usuario verSeScrum = usuarioService.buscaUsuario(currentPrincipalName).get();
+            if(verSeScrum.getRole().getName().equals("ROLE_USER")){
+                //scrum!
+                //send email....
+            }
+        }
+
+            mv.addObject("list", list);
         return mv;
     }
 

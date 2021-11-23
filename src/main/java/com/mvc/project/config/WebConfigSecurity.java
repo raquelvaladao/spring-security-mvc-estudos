@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 
@@ -29,13 +30,14 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
             http.authorizeRequests()
                     .antMatchers( "/", "/h2-console/**").permitAll()
                     .antMatchers("/register").permitAll()
-                    .antMatchers("/products").hasAuthority("ROLE_ADMIN")
+                    .antMatchers("/products/new", "/products/edit", "/products/delete").hasAuthority("ROLE_ADMIN")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin(form -> form
                             .loginPage("/login")
-                            .defaultSuccessUrl("/wa", true)
-                            .permitAll())
+
+                            .defaultSuccessUrl("/products?success=true", true).permitAll()
+                            .failureUrl("/login?error=true").permitAll())
                     .logout(
                             logout -> logout.logoutUrl("/logout")
                             .logoutSuccessUrl("/login")
@@ -45,6 +47,12 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 
             http.csrf().disable();
             http.headers().frameOptions().disable();
+/*
+            http.exceptionHandling().accessDeniedPage("/errors/404error")
+                    .accessDeniedHandler((request, response, accessDeniedException) -> {
+                        response.sendError(HttpServletResponse.SC_FORBIDDEN);
+
+                    });*/
         }
 
     @Override

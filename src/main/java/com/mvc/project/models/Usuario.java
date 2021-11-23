@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-@Table(name = "users")
+@Table(name = "usuario")
 public class Usuario implements UserDetails {
 
     @Id
